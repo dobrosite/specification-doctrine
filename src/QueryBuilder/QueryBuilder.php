@@ -4,6 +4,7 @@ namespace DobroSite\Specification\Doctrine\QueryBuilder;
 
 use DobroSite\Specification\Doctrine\HandlerRegistry;
 use DobroSite\Specification\Specification;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\From;
 use Doctrine\ORM\Query\Expr\Join;
@@ -12,8 +13,26 @@ use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;
 /**
  * Составитель запросов DQL на основе спецификаций.
  *
+ * @method self add($dqlPartName, $dqlPart, $append = false)
+ * @method self addCriteria(Criteria $criteria)
+ * @method self addGroupBy($groupBy)
+ * @method self addOrderBy($sort, $order = null)
+ * @method self addSelect($select = null)
+ * @method self andHaving($having)
+ * @method self andWhere()
+ * @method self delete($delete = null, $alias = null)
+ * @method self distinct($flag = true)
  * @method self from($from, $alias, $indexBy = null)
+ * @method self groupBy($groupBy)
+ * @method self having($having)
+ * @method self innerJoin($join, $alias, $conditionType = null, $condition = null, $indexBy = null)
+ * @method self leftJoin($join, $alias, $conditionType = null, $condition = null, $indexBy = null)
+ * @method self orderBy($sort, $order = null)
+ * @method self orHaving($having)
+ * @method self orWhere()
  * @method self select($select = null)
+ * @method self update($update = null, $alias = null)
+ * @method self where($predicates)
  *
  * @since 1.0
  */

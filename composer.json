@@ -1,0 +1,42 @@
+{
+    "name": "dobrosite/specification-doctrine",
+    "description": "Specification support for Doctrine",
+    "type": "library",
+    "keywords": [
+        "doctrine",
+        "spec",
+        "specification"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Михаил Красильников",
+            "email": "m.krasilniov@dobro.site"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^5.6|^7.0",
+        "dobrosite/specification": "dev-master",
+        "doctrine/orm": "^2.5"
+    },
+    "require-dev": {
+        "ext-pdo_sqlite": "*",
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "DobroSite\\Specification\\Doctrine\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DobroSite\\Specification\\Doctrine\\Examples\\": "examples",
+            "DobroSite\\Specification\\Doctrine\\Tests\\": "tests"
+        }
+    }
+}

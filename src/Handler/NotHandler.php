@@ -12,6 +12,8 @@ use Doctrine\ORM\Query\Expr\Comparison;
 
 /**
  * Обработчик спецификаций «Not».
+ *
+ * @since 1.0
  */
 class NotHandler implements Handler
 {
@@ -26,6 +28,8 @@ class NotHandler implements Handler
      * Задаёт обработчик спецификаций.
      *
      * @param HandlerRegistry $handlerRegistry
+     *
+     * @since 1.0
      */
     public function __construct(HandlerRegistry $handlerRegistry)
     {
@@ -60,6 +64,8 @@ class NotHandler implements Handler
      * Возвращает имя класса поддерживаемых спецификаций.
      *
      * @return string
+     *
+     * @since 1.0
      */
     public function getSpecificationClassName()
     {

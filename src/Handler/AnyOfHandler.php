@@ -12,6 +12,8 @@ use Doctrine\ORM\Query\Expr\Comparison;
 
 /**
  * Обработчик спецификаций «AnyOf».
+ *
+ * @since 1.0
  */
 class AnyOfHandler implements Handler
 {
@@ -26,6 +28,8 @@ class AnyOfHandler implements Handler
      * Задаёт обработчик спецификаций.
      *
      * @param HandlerRegistry $handlerRegistry
+     *
+     * @since 1.0
      */
     public function __construct(HandlerRegistry $handlerRegistry)
     {
@@ -63,6 +67,8 @@ class AnyOfHandler implements Handler
      * Возвращает имя класса поддерживаемых спецификаций.
      *
      * @return string
+     *
+     * @since 1.0
      */
     public function getSpecificationClassName()
     {

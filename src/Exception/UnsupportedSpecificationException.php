@@ -7,6 +7,8 @@ use DobroSite\Specification\Specification;
 
 /**
  * Спецификация не поддерживается обработчиком.
+ *
+ * @since 1.0
  */
 class UnsupportedSpecificationException extends \LogicException
 {

@@ -38,6 +38,8 @@ class QueryBuilder extends DoctrineQueryBuilder
      *
      * @param EntityManagerInterface $em
      * @param HandlerRegistry        $handlerRegistry
+     *
+     * @since 1.0
      */
     public function __construct(EntityManagerInterface $em, HandlerRegistry $handlerRegistry)
     {
@@ -52,6 +54,8 @@ class QueryBuilder extends DoctrineQueryBuilder
      * @param string $entityClass
      *
      * @return string
+     *
+     * @since 1.0
      */
     public function getAliasFor($entityClass)
     {
@@ -93,6 +97,8 @@ class QueryBuilder extends DoctrineQueryBuilder
      * @param string|null $indexBy
      *
      * @return $this
+     *
+     * @since 1.0
      */
     public function join(
         $join,

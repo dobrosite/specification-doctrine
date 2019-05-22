@@ -160,7 +160,7 @@ class QueryBuilder extends DoctrineQueryBuilder
         $handler = $this->handlerRegistry->getHandlerFor($specification);
 
         $condition = $handler->createCondition($specification, $this);
-        $this->where($condition);
+        $this->andWhere($condition);
 
         return $this;
     }

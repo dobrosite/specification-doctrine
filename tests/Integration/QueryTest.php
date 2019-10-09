@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Tests\Integration;
 
 use DobroSite\Specification\Doctrine\Bridge;
@@ -14,7 +16,7 @@ use Doctrine\ORM\Tools\Setup;
 use PHPUnit\Framework\TestCase;
 
 /**
- * TODO Дать краткое описание класса.
+ * Тесты с использованием реальной БД.
  *
  * @coversNothing
  */
@@ -28,11 +30,34 @@ class QueryTest extends TestCase
     private $entityManager;
 
     /**
+     * TODO Дать краткое описание метода.
+     */
+    public function testSpecificationSatisfied(): void
+    {
+        $bridge = new Bridge();
+        $bridge->registerHandler(new ArticleHandler());
+
+        $specification = new Article('А1');
+
+        $queryBuilder = $bridge->createQueryBuilder($this->entityManager);
+        $queryBuilder
+            ->from(Product::class, 'p')
+            ->select('p')
+            ->match($specification);
+
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        self::assertCount(1, $result);
+        self::assertEquals('А1', $result[0]->article());
+    }
+
+    /**
      * Готовит окружение теста.
      *
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -61,28 +86,5 @@ class QueryTest extends TestCase
 
         $this->entityManager->flush();
         $this->entityManager->clear();
-    }
-
-    /**
-     * TODO Дать краткое описание метода.
-     */
-    public function testSpecificationSatisfied()
-    {
-        $bridge = new Bridge();
-        $bridge->registerHandler(new ArticleHandler());
-
-        $specification = new Article('А1');
-
-        $queryBuilder = $bridge->createQueryBuilder($this->entityManager);
-        $queryBuilder
-            ->from(Product::class, 'p')
-            ->select('p')
-            ->match($specification);
-
-
-        $result = $queryBuilder->getQuery()->getResult();
-
-        self::assertCount(1, $result);
-        self::assertEquals('А1', $result[0]->article());
     }
 }

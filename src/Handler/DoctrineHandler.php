@@ -1,19 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Handler;
 
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
+use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
+use DobroSite\Specification\Handler\Handler;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
 
 /**
- * Обработчик спецификаций.
+ * Обработчик спецификаций для Doctrine.
  *
  * @since 1.0
  */
-interface Handler
+interface DoctrineHandler extends Handler
 {
     /**
      * Создаёт условие на основе спецификации.
@@ -28,13 +31,4 @@ interface Handler
      * @since 1.0
      */
     public function createCondition(Specification $specification, QueryBuilder $queryBuilder);
-
-    /**
-     * Возвращает имя класса поддерживаемых спецификаций.
-     *
-     * @return string
-     *
-     * @since 1.0
-     */
-    public function getSpecificationClassName();
 }

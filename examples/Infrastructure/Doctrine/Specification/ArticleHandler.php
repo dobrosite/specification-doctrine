@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Examples\Infrastructure\Doctrine\Specification;
 
 use DobroSite\Specification\Doctrine\Examples\Domain\Entity\Product;
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
-use DobroSite\Specification\Doctrine\Handler\Handler;
+use DobroSite\Specification\Doctrine\Handler\DoctrineHandler;
 use DobroSite\Specification\Doctrine\Examples\Domain\Specification\Article;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
+use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
@@ -14,7 +16,7 @@ use Doctrine\ORM\Query\Expr\Comparison;
 /**
  * Обработчик спецификации Article.
  */
-class ArticleHandler implements Handler
+class ArticleHandler implements DoctrineHandler
 {
     /**
      * Создаёт условие на основе спецификации.
@@ -25,8 +27,6 @@ class ArticleHandler implements Handler
      * @return Base|Comparison|string
      *
      * @throws UnsupportedSpecificationException Если переданная спецификация не поддерживается.
-     *
-     * @since 1.0
      */
     public function createCondition(Specification $specification, QueryBuilder $queryBuilder)
     {
@@ -45,7 +45,7 @@ class ArticleHandler implements Handler
      *
      * @return string
      */
-    public function getSpecificationClassName()
+    public function getSpecificationClassName(): string
     {
         return Article::class;
     }

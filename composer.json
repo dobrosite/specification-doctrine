@@ -20,13 +20,16 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^5.6|^7.0",
-        "dobrosite/specification": "^0.1.0",
+        "php": "^7.1",
+        "dobrosite/specification": "^2.0",
         "doctrine/orm": "^2.5"
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
-        "phpunit/phpunit": "^5.7"
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.11.16",
+        "phpstan/phpstan-phpunit": "^0.11.2",
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "psr-4": {

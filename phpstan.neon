@@ -1,0 +1,8 @@
+parameters:
+    level: max
+    inferPrivatePropertyTypeFromConstructor: true
+    paths:
+        - src
+        - tests
+    ignoreErrors:
+        - '/Parameter .* of class DobroSite\\Specification\\Logical\\(AllOf|AnyOf) constructor expects DobroSite\\Specification\\Specification, \w+ given/'

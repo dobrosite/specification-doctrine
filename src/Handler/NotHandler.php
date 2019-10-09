@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Handler;
 
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
-use DobroSite\Specification\Doctrine\HandlerRegistry;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
-use DobroSite\Specification\Not;
+use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
+use DobroSite\Specification\Handler\HandlerRegistry;
+use DobroSite\Specification\Logical\Not;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
@@ -15,7 +17,7 @@ use Doctrine\ORM\Query\Expr\Comparison;
  *
  * @since 1.0
  */
-class NotHandler implements Handler
+class NotHandler implements DoctrineHandler
 {
     /**
      * Реестр обработчиков спецификаций.
@@ -54,8 +56,16 @@ class NotHandler implements Handler
             throw new UnsupportedSpecificationException($specification, $this);
         }
 
-        $handler = $this->handlerRegistry->getHandlerFor($specification->getSpecification());
-        $nested  = $handler->createCondition($specification->getSpecification(), $queryBuilder);
+        $nestedSpecification = $specification->getSpecifications()[0];
+        $handler = $this->handlerRegistry->getHandlerFor(
+            $nestedSpecification,
+            [DoctrineHandler::class]
+        );
+        if (!$handler instanceof DoctrineHandler) {
+            throw new UnsupportedSpecificationException($nestedSpecification, $handler);
+        }
+
+        $nested  = $handler->createCondition($nestedSpecification, $queryBuilder);
 
         return $queryBuilder->expr()->not($nested);
     }
@@ -67,7 +77,7 @@ class NotHandler implements Handler
      *
      * @since 1.0
      */
-    public function getSpecificationClassName()
+    public function getSpecificationClassName(): string
     {
         return Not::class;
     }

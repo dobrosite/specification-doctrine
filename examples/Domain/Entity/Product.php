@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Examples\Domain\Entity;
 
 /**
@@ -14,8 +16,8 @@ class Product
      *
      * @var string
      *
-     * @Column(type="string")
      * @Id
+     * @Column(type="string")
      */
     private $article;
 
@@ -24,7 +26,7 @@ class Product
      *
      * @param string $article Артикул.
      */
-    public function __construct($article)
+    public function __construct(string $article)
     {
         $this->article = $article;
     }
@@ -34,7 +36,7 @@ class Product
      *
      * @return string
      */
-    public function article()
+    public function article(): string
     {
         return $this->article;
     }

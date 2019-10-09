@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Handler;
 
-use DobroSite\Specification\AnyOf;
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
-use DobroSite\Specification\Doctrine\HandlerRegistry;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
+use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
+use DobroSite\Specification\Handler\HandlerRegistry;
+use DobroSite\Specification\Logical\AnyOf;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
@@ -15,7 +17,7 @@ use Doctrine\ORM\Query\Expr\Comparison;
  *
  * @since 1.0
  */
-class AnyOfHandler implements Handler
+class AnyOfHandler implements DoctrineHandler
 {
     /**
      * Реестр обработчиков спецификаций.
@@ -56,7 +58,13 @@ class AnyOfHandler implements Handler
 
         $parts = [];
         foreach ($specification->getSpecifications() as $nestedSpecification) {
-            $handler = $this->handlerRegistry->getHandlerFor($nestedSpecification);
+            $handler = $this->handlerRegistry->getHandlerFor(
+                $nestedSpecification,
+                [DoctrineHandler::class]
+            );
+            if (!$handler instanceof DoctrineHandler) {
+                throw new UnsupportedSpecificationException($specification, $handler);
+            }
             $parts[] = $handler->createCondition($nestedSpecification, $queryBuilder);
         }
 
@@ -70,7 +78,7 @@ class AnyOfHandler implements Handler
      *
      * @since 1.0
      */
-    public function getSpecificationClassName()
+    public function getSpecificationClassName(): string
     {
         return AnyOf::class;
     }

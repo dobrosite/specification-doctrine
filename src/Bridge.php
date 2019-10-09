@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine;
 
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
-use DobroSite\Specification\Doctrine\Handler\Handler;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
-use DobroSite\Specification\Specification;
+use DobroSite\Specification\Handler\BasicHandlerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -16,15 +16,8 @@ use Doctrine\ORM\EntityManagerInterface;
  *
  * @since 1.0
  */
-final class Bridge implements QueryBuilderFactory, HandlerRegistry
+final class Bridge extends BasicHandlerRegistry implements QueryBuilderFactory
 {
-    /**
-     * Обработчики спецификаций.
-     *
-     * @var Handler[]
-     */
-    private $handlers = [];
-
     /**
      * Создаёт составителя запросов для указанного менеджера сущностей.
      *
@@ -32,41 +25,8 @@ final class Bridge implements QueryBuilderFactory, HandlerRegistry
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilder(EntityManagerInterface $entityManager)
+    public function createQueryBuilder(EntityManagerInterface $entityManager): QueryBuilder
     {
         return new QueryBuilder($entityManager, $this);
-    }
-
-    /**
-     * Возвращает обработчик для указанной спецификации.
-     *
-     * @param Specification $specification
-     *
-     * @return Handler
-     *
-     * @throws UnsupportedSpecificationException Если переданная спецификация не поддерживается.
-     */
-    public function getHandlerFor(Specification $specification)
-    {
-        $className = get_class($specification);
-        if (!array_key_exists($className, $this->handlers)) {
-            throw new UnsupportedSpecificationException($specification);
-        }
-
-        return $this->handlers[$className];
-    }
-
-    /**
-     * Регистрирует обработчик спецификаций.
-     *
-     * @param Handler $handler
-     *
-     * @return void
-     *
-     * @since 1.0
-     */
-    public function registerHandler(Handler $handler)
-    {
-        $this->handlers[$handler->getSpecificationClassName()] = $handler;
     }
 }

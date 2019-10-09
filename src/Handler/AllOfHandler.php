@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Handler;
 
-use DobroSite\Specification\AllOf;
-use DobroSite\Specification\Doctrine\Exception\UnsupportedSpecificationException;
-use DobroSite\Specification\Doctrine\HandlerRegistry;
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
+use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
+use DobroSite\Specification\Handler\HandlerRegistry;
+use DobroSite\Specification\Logical\AllOf;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
@@ -15,7 +17,7 @@ use Doctrine\ORM\Query\Expr\Comparison;
  *
  * @since 1.0
  */
-class AllOfHandler implements Handler
+class AllOfHandler implements DoctrineHandler
 {
     /**
      * Реестр обработчиков спецификаций.
@@ -40,7 +42,7 @@ class AllOfHandler implements Handler
      * Создаёт условие на основе спецификации.
      *
      * @param Specification $specification Спецификация.
-     * @param QueryBuilder  $queryBuilder  Построитель запросов.
+     * @param QueryBuilder  $queryBuilder  Составитель запросов.
      *
      * @return Base|Comparison|string
      *
@@ -56,7 +58,13 @@ class AllOfHandler implements Handler
 
         $parts = [];
         foreach ($specification->getSpecifications() as $nestedSpecification) {
-            $handler = $this->handlerRegistry->getHandlerFor($nestedSpecification);
+            $handler = $this->handlerRegistry->getHandlerFor(
+                $nestedSpecification,
+                [DoctrineHandler::class]
+            );
+            if (!$handler instanceof DoctrineHandler) {
+                throw new UnsupportedSpecificationException($specification, $handler);
+            }
             $parts[] = $handler->createCondition($nestedSpecification, $queryBuilder);
         }
 
@@ -70,7 +78,7 @@ class AllOfHandler implements Handler
      *
      * @since 1.0
      */
-    public function getSpecificationClassName()
+    public function getSpecificationClassName(): string
     {
         return AllOf::class;
     }

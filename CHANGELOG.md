@@ -5,6 +5,18 @@
 
 ## 1.0.0 - Не выпущено
 
+### Удалено
+
+- Исключение `UnsupportedSpecificationException`.
+- Класс `HandlerRegistry`. Его функции переложены на `Bridge``.
+
+### Изменено
+
+- Минимальная версия PHP теперь 7.1.
+- Минимальная версия `dobrosite/specification` теперь 2.0.
+- Интерфейс `Handler` переименован в `DoctrineHandler` и унаследован от `Handler` из
+  `dobrosite/specification`.
+
 
 ## 0.2.0 - 22.05.2019
 

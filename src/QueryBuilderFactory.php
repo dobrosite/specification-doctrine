@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine;
 
 use DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder;
@@ -41,5 +43,5 @@ interface QueryBuilderFactory
      *
      * @since 1.0
      */
-    public function createQueryBuilder(EntityManagerInterface $entityManager);
+    public function createQueryBuilder(EntityManagerInterface $entityManager): QueryBuilder;
 }

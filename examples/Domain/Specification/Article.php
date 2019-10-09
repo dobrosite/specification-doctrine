@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\Examples\Domain\Specification;
 
 use DobroSite\Specification\Doctrine\Examples\Domain\Entity\Product;
@@ -32,7 +34,7 @@ class Article implements Specification
      *
      * @return string
      */
-    public function getArticle()
+    public function getArticle(): string
     {
         return $this->article;
     }
@@ -44,7 +46,7 @@ class Article implements Specification
      *
      * @return bool
      */
-    public function isSatisfiedBy($candidate)
+    public function isSatisfiedBy($candidate): bool
     {
         if (!$candidate instanceof Product) {
             return false;

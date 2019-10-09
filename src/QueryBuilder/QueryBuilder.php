@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DobroSite\Specification\Doctrine\QueryBuilder;
 
-use DobroSite\Specification\Doctrine\HandlerRegistry;
+use DobroSite\Specification\Doctrine\Handler\DoctrineHandler;
+use DobroSite\Specification\Exception\Handler\NoMatchingHandlerException;
+use DobroSite\Specification\Handler\HandlerRegistry;
 use DobroSite\Specification\Specification;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +23,7 @@ use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;
  * @method self addOrderBy($sort, $order = null)
  * @method self addSelect($select = null)
  * @method self andHaving($having)
- * @method self andWhere()
+ * @method self andWhere(...$arguments)
  * @method self delete($delete = null, $alias = null)
  * @method self distinct($flag = true)
  * @method self from($from, $alias, $indexBy = null)
@@ -76,7 +80,7 @@ class QueryBuilder extends DoctrineQueryBuilder
      *
      * @since 1.0
      */
-    public function getAliasFor($entityClass)
+    public function getAliasFor($entityClass): string
     {
         // Вначале ищем среди корневых псевдонимов.
         foreach ($this->getDQLPart('from') as $clause) {
@@ -125,7 +129,7 @@ class QueryBuilder extends DoctrineQueryBuilder
         $conditionType = null,
         $condition = null,
         $indexBy = null
-    ) {
+    ): self {
         $parts = $this->getDQLPart('join');
 
         if (is_array($parts)) {
@@ -153,11 +157,13 @@ class QueryBuilder extends DoctrineQueryBuilder
      *
      * @return $this
      *
+     * @throws NoMatchingHandlerException Если нет обработчика для этой спецификации.
+     *
      * @since 1.0
      */
-    public function match(Specification $specification)
+    public function match(Specification $specification): self
     {
-        $handler = $this->handlerRegistry->getHandlerFor($specification);
+        $handler = $this->handlerRegistry->getHandlerFor($specification, [DoctrineHandler::class]);
 
         $condition = $handler->createCondition($specification, $this);
         $this->andWhere($condition);

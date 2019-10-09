@@ -105,7 +105,7 @@ class AnyOfHandlerTest extends TestCase
     public function testThrowExceptionOnInvalidSpecification(): void
     {
         $this->expectException(UnsupportedSpecificationException::class);
-        $this->expectExceptionMessageMatches(
+        $this->expectExceptionMessageRegExp(
             '/.*AnyOfHandler supports only .*AnyOf specifications, but Mock_Specification_\w+ given./'
         );
 

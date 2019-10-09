@@ -93,7 +93,7 @@ class NotHandlerTest extends TestCase
     public function testThrowExceptionOnInvalidSpecification(): void
     {
         $this->expectException(UnsupportedSpecificationException::class);
-        $this->expectExceptionMessageMatches(
+        $this->expectExceptionMessageRegExp(
             '/.*NotHandler supports only .*Not specifications, but Mock_Specification_\w+ given./'
         );
 

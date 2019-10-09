@@ -12,6 +12,7 @@ use DobroSite\Specification\Exception\Handler\UnsupportedSpecificationException;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
+use Doctrine\ORM\Query\Expr\Func;
 
 /**
  * Обработчик спецификации Article.
@@ -24,7 +25,7 @@ class ArticleHandler implements DoctrineHandler
      * @param Specification $specification Спецификация.
      * @param QueryBuilder  $queryBuilder  Построитель запросов.
      *
-     * @return Base|Comparison|string
+     * @return Base|Comparison|Func|string
      *
      * @throws UnsupportedSpecificationException Если переданная спецификация не поддерживается.
      */

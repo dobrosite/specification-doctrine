@@ -83,7 +83,6 @@ class AllOfHandlerTest extends TestCase
             $this->queryBuilder
         );
 
-        self::assertInstanceOf(Expr\Composite::class, $expr);
         self::assertEquals('spec1 AND spec2', (string) $expr);
     }
 

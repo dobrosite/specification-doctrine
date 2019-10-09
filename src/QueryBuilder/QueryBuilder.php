@@ -98,6 +98,9 @@ class QueryBuilder extends DoctrineQueryBuilder
         if (!array_key_exists($entityClass, $this->aliases)) {
             $parts = explode('\\', $entityClass);
             $className = end($parts);
+            if ($className === false) {
+                $className = $entityClass;
+            }
 
             // $className делает имена более читаемыми.
             // count($this->aliases) предотвращает конфликты.
@@ -165,8 +168,10 @@ class QueryBuilder extends DoctrineQueryBuilder
     {
         $handler = $this->handlerRegistry->getHandlerFor($specification, [DoctrineHandler::class]);
 
-        $condition = $handler->createCondition($specification, $this);
-        $this->andWhere($condition);
+        if ($handler instanceof DoctrineHandler) {
+            $condition = $handler->createCondition($specification, $this);
+            $this->andWhere($condition);
+        }
 
         return $this;
     }

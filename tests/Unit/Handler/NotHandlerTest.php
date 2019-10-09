@@ -71,7 +71,6 @@ class NotHandlerTest extends TestCase
 
         $expr = $this->handler->createCondition(new Not($spec), $this->queryBuilder);
 
-        self::assertInstanceOf(Expr\Func::class, $expr);
         self::assertEquals('NOT(spec)', (string) $expr);
     }
 

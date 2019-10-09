@@ -11,6 +11,7 @@ use DobroSite\Specification\Logical\AllOf;
 use DobroSite\Specification\Specification;
 use Doctrine\ORM\Query\Expr\Base;
 use Doctrine\ORM\Query\Expr\Comparison;
+use Doctrine\ORM\Query\Expr\Func;
 
 /**
  * Обработчик спецификаций «AllOf».
@@ -44,7 +45,7 @@ class AllOfHandler implements DoctrineHandler
      * @param Specification $specification Спецификация.
      * @param QueryBuilder  $queryBuilder  Составитель запросов.
      *
-     * @return Base|Comparison|string
+     * @return Base|Comparison|Func|string
      *
      * @throws UnsupportedSpecificationException Если переданная спецификация не поддерживается.
      *

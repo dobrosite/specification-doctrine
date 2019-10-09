@@ -83,7 +83,6 @@ class AnyOfHandlerTest extends TestCase
             $this->queryBuilder
         );
 
-        self::assertInstanceOf(Expr\Composite::class, $expr);
         self::assertEquals('spec1 OR spec2', (string) $expr);
     }
 

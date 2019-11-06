@@ -67,9 +67,11 @@ class QueryBuilderTest extends TestCase
         self::assertNotEquals($placeholder1, $placeholder2);
 
         $parameter = $this->queryBuilder->getParameter('foo_1');
+        self::assertNotNull($parameter);
         self::assertEquals('1', $parameter->getValue());
 
         $parameter = $this->queryBuilder->getParameter('foo_2');
+        self::assertNotNull($parameter);
         self::assertEquals('2', $parameter->getValue());
     }
 

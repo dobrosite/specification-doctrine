@@ -57,7 +57,14 @@ class QueryBuilder extends DoctrineQueryBuilder
     private $handlerRegistry;
 
     /**
-     * Создаёт построитель запросов.
+     * Реестр индексов заполнителей для подстановки параметров.
+     *
+     * @var int[]
+     */
+    private $placeholders = [];
+
+    /**
+     * Создаёт составитель запросов.
      *
      * @param EntityManagerInterface $em
      * @param HandlerRegistry        $handlerRegistry
@@ -69,6 +76,31 @@ class QueryBuilder extends DoctrineQueryBuilder
         parent::__construct($em);
 
         $this->handlerRegistry = $handlerRegistry;
+    }
+
+    /**
+     * Создаёт новый параметр и возвращает заполнитель для него.
+     *
+     * Надстройка над QueryBuilder::setParameter().
+     *
+     * @param string $parameter Имя параметра, например «id».
+     * @param mixed  $value     Значение параметра.
+     *
+     * @return string Заполнитель, например «:id_1».
+     *
+     * @since 1.1
+     */
+    public function createParameter(string $parameter, $value): string
+    {
+        if (!array_key_exists($parameter, $this->placeholders)) {
+            $this->placeholders[$parameter] = 0;
+        }
+
+        $placeholder = $parameter . '_' . (++$this->placeholders[$parameter]);
+
+        $this->setParameter($placeholder, $value);
+
+        return ':' . $placeholder;
     }
 
     /**

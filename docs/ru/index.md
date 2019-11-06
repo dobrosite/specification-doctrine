@@ -56,16 +56,17 @@ public function createCondition(Specification $specification, QueryBuilder $quer
     }
 
     $product = $queryBuilder->getAliasFor(Product::class);
-    $queryBuilder->setParameter('article', $specification->getArticle());
+    $article = $queryBuilder->createParameter('article', $specification->getArticle());
 
-    return $queryBuilder->expr()->eq($product . '.article', ':article');
+    return $queryBuilder->expr()->eq($product . '.article', $article);
 }
 ```
 
 Важные моменты.
 
-Если у спецификации есть параметры, их следует добавлять в `QueryBuilder` как обычно, при помощи
-метода `setParameter`.
+Если у спецификации есть параметры, их следует добавлять в `QueryBuilder` при помощи метода
+`createParameter`, как показано в примере. Он обеспечит правильную привязку значений при
+многократном использовании спецификации в одном запросе.
 
 Для получения псевдонима класса сущностей используйте метод `QueryBuilder::getAliasFor`, который
 при наличии ранее заданного псевдонима вернёт его, а при отсутствии, создаст новый.

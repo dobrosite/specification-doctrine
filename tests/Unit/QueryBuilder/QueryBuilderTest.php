@@ -55,6 +55,25 @@ class QueryBuilderTest extends TestCase
     }
 
     /**
+     * Проверяет создание параметров.
+     *
+     * @throws \Throwable
+     */
+    public function testCreateParameter(): void
+    {
+        $placeholder1 = $this->queryBuilder->createParameter('foo', '1');
+        $placeholder2 = $this->queryBuilder->createParameter('foo', '2');
+
+        self::assertNotEquals($placeholder1, $placeholder2);
+
+        $parameter = $this->queryBuilder->getParameter('foo_1');
+        self::assertEquals('1', $parameter->getValue());
+
+        $parameter = $this->queryBuilder->getParameter('foo_2');
+        self::assertEquals('2', $parameter->getValue());
+    }
+
+    /**
      * Проверяет получение псевдонима.
      *
      * @throws \Throwable
@@ -68,6 +87,22 @@ class QueryBuilderTest extends TestCase
 
         self::assertEquals('f', $alias1);
         self::assertEquals($alias1, $alias2);
+    }
+
+    /**
+     * Проверяет что операторы JOIN не добавляются повторно.
+     *
+     * @throws \Throwable
+     */
+    public function testJoinsNotDuplicated(): void
+    {
+        $this->queryBuilder
+            ->from('Foo', 'f')
+            ->select('f')
+            ->join('Bar', 'b')
+            ->join('Bar', 'b');
+
+        self::assertEquals('SELECT f FROM Foo f INNER JOIN Bar b', $this->queryBuilder->getDQL());
     }
 
     /**
@@ -96,22 +131,6 @@ class QueryBuilderTest extends TestCase
 
         self::assertSame($this->queryBuilder, $queryBuilder);
         self::assertEquals('SELECT WHERE X = Y', $this->queryBuilder->getDQL());
-    }
-
-    /**
-     * Проверяет что операторы JOIN не добавляются повторно.
-     *
-     * @throws \Throwable
-     */
-    public function testJoinsNotDuplicated(): void
-    {
-        $this->queryBuilder
-            ->from('Foo', 'f')
-            ->select('f')
-            ->join('Bar', 'b')
-            ->join('Bar', 'b');
-
-        self::assertEquals('SELECT f FROM Foo f INNER JOIN Bar b', $this->queryBuilder->getDQL());
     }
 
     /**

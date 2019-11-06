@@ -36,9 +36,9 @@ class ArticleHandler implements DoctrineHandler
         }
 
         $product = $queryBuilder->getAliasFor(Product::class);
-        $queryBuilder->setParameter('article', $specification->getArticle());
+        $article = $queryBuilder->createParameter('article', $specification->getArticle());
 
-        return $queryBuilder->expr()->eq($product . '.article', ':article');
+        return $queryBuilder->expr()->eq($product . '.article', $article);
     }
 
     /**

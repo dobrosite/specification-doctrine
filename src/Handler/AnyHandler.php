@@ -15,7 +15,7 @@ use Doctrine\ORM\Query\Expr\Func;
 /**
  * Обработчик спецификаций «Any».
  *
- * @since x.x
+ * @since 1.2
  */
 class AnyHandler implements DoctrineHandler
 {

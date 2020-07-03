@@ -4,3 +4,7 @@ parameters:
     paths:
         - src
         - tests
+    ignoreErrors:
+        -
+            message: '/Orx\|string\|null, .*Comparison.* given/'
+            path: src/Handler/AllOfHandler.php

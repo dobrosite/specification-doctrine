@@ -104,7 +104,7 @@ class AllOfHandlerTest extends TestCase
     public function testThrowExceptionOnInvalidSpecification(): void
     {
         $this->expectException(UnsupportedSpecificationException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/.*AllOfHandler supports only .*AllOf specifications, but Mock_Specification_\w+ given./'
         );
 

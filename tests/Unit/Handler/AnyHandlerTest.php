@@ -46,7 +46,7 @@ class AnyHandlerTest extends TestCase
             $this->queryBuilder
         );
 
-        self::assertEquals('1', (string) $expr);
+        self::assertEquals('1 = 1', (string) $expr);
     }
 
     /**

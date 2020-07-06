@@ -35,7 +35,7 @@ class AnyHandler implements DoctrineHandler
             throw new UnsupportedSpecificationException($specification, $this);
         }
 
-        return '1';
+        return '1 = 1';
     }
 
     /**

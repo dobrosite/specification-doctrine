@@ -62,17 +62,19 @@ class QueryBuilderTest extends TestCase
     public function testCreateParameter(): void
     {
         $placeholder1 = $this->queryBuilder->createParameter('foo', '1');
-        $placeholder2 = $this->queryBuilder->createParameter('foo', '2');
+        $placeholder2 = $this->queryBuilder->createParameter('foo', true, \PDO::PARAM_BOOL);
 
         self::assertNotEquals($placeholder1, $placeholder2);
 
         $parameter = $this->queryBuilder->getParameter('foo_1');
         self::assertNotNull($parameter);
         self::assertEquals('1', $parameter->getValue());
+        self::assertEquals(\PDO::PARAM_STR, $parameter->getType());
 
         $parameter = $this->queryBuilder->getParameter('foo_2');
         self::assertNotNull($parameter);
-        self::assertEquals('2', $parameter->getValue());
+        self::assertTrue($parameter->getValue());
+        self::assertEquals(\PDO::PARAM_BOOL, $parameter->getType());
     }
 
     /**

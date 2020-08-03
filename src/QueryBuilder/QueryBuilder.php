@@ -83,14 +83,15 @@ class QueryBuilder extends DoctrineQueryBuilder
      *
      * Надстройка над QueryBuilder::setParameter().
      *
-     * @param string $parameter Имя параметра, например «id».
-     * @param mixed  $value     Значение параметра.
+     * @param string          $parameter Имя параметра, например «id».
+     * @param mixed           $value     Значение параметра.
+     * @param string|int|null $type      Константа PDO::PARAM_* или \Doctrine\DBAL\Types\Type::*.
      *
      * @return string Заполнитель, например «:id_1».
      *
      * @since 1.1
      */
-    public function createParameter(string $parameter, $value): string
+    public function createParameter(string $parameter, $value, $type = null): string
     {
         if (!array_key_exists($parameter, $this->placeholders)) {
             $this->placeholders[$parameter] = 0;
@@ -98,7 +99,7 @@ class QueryBuilder extends DoctrineQueryBuilder
 
         $placeholder = $parameter . '_' . (++$this->placeholders[$parameter]);
 
-        $this->setParameter($placeholder, $value);
+        $this->setParameter($placeholder, $value, $type);
 
         return ':' . $placeholder;
     }

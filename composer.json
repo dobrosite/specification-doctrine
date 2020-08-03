@@ -25,10 +25,11 @@
         "doctrine/orm": "^2.6.3"
     },
     "require-dev": {
+        "ext-pdo": "*",
         "ext-pdo_sqlite": "*",
-        "phpstan/extension-installer": "^1.0.4",
-        "phpstan/phpstan": "^0.12.32",
-        "phpstan/phpstan-phpunit": "^0.12.11",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
         "phpunit/phpunit": "^8.5"
     },
     "autoload": {

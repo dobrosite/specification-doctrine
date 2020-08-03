@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.2",
         "dobrosite/specification": "^2.4",
-        "doctrine/orm": "^2.6.3"
+        "doctrine/orm": "^2.7"
     },
     "require-dev": {
         "ext-pdo": "*",

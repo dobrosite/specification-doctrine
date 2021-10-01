@@ -29,8 +29,8 @@
         "ext-pdo_sqlite": "*",
         "doctrine/cache": "^1.11",
         "phpstan/extension-installer": "^1.0.4",
-        "phpstan/phpstan": "^0.12.34",
-        "phpstan/phpstan-phpunit": "^0.12.15",
+        "phpstan/phpstan": "^0.12.99",
+        "phpstan/phpstan-phpunit": "^0.12.22",
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {

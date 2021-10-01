@@ -6,10 +6,7 @@ parameters:
         - tests
     ignoreErrors:
         -
-            path: src/Handler/AllOfHandler.php
-            message: '/Orx\|string\|null, .*Comparison.* given/'
-        -
-            path: src/Handler/AnyOfHandler.php
+            path: src/Handler
             message: '/Orx\|string\|null, .*Comparison.* given/'
         -
             path: src/QueryBuilder/QueryBuilder.php

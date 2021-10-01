@@ -20,28 +20,26 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \DobroSite\Specification\Doctrine\Handler\AllOfHandler
  */
-class AllOfHandlerTest extends TestCase
+final class AllOfHandlerTest extends TestCase
 {
     /**
      * Проверяемый обработчик.
-     *
-     * @var AllOfHandler
      */
-    private $handler;
+    private AllOfHandler $handler;
 
     /**
      * Реестр обработчиков спецификаций.
      *
      * @var HandlerRegistry&MockObject
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Составитель запросов.
      *
      * @var QueryBuilder&MockObject
      */
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     /**
      * Проверяет создание выражения из спецификации.

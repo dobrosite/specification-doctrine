@@ -14,23 +14,24 @@
             "email": "m.krasilniov@dobro.site"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
     },
     "require": {
-        "php": "^7.2",
-        "dobrosite/specification": "^2.4",
+        "php": "^7.4|^8.0",
+        "dobrosite/specification": "^3.0",
         "doctrine/orm": "^2.7"
     },
     "require-dev": {
         "ext-pdo": "*",
         "ext-pdo_sqlite": "*",
+        "doctrine/cache": "^1.11",
         "phpstan/extension-installer": "^1.0.4",
         "phpstan/phpstan": "^0.12.34",
         "phpstan/phpstan-phpunit": "^0.12.15",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {

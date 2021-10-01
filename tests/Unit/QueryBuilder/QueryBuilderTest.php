@@ -17,28 +17,26 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \DobroSite\Specification\Doctrine\QueryBuilder\QueryBuilder
  */
-class QueryBuilderTest extends TestCase
+final class QueryBuilderTest extends TestCase
 {
     /**
      * Менеджер сущностей Доктрины.
      *
      * @var EntityManagerInterface&MockObject
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * Реестр обработчиков спецификаций.
      *
      * @var HandlerRegistry&MockObject
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Проверяемый составитель запросов DQL.
-     *
-     * @var QueryBuilder
      */
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     /**
      * Проверяет создание псевдонима.

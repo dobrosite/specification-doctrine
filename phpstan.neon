@@ -6,5 +6,11 @@ parameters:
         - tests
     ignoreErrors:
         -
-            message: '/Orx\|string\|null, .*Comparison.* given/'
             path: src/Handler/AllOfHandler.php
+            message: '/Orx\|string\|null, .*Comparison.* given/'
+        -
+            path: src/Handler/AnyOfHandler.php
+            message: '/Orx\|string\|null, .*Comparison.* given/'
+        -
+            path: src/QueryBuilder/QueryBuilder.php
+            message: '/between string and false will always evaluate to false/'

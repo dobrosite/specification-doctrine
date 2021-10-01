@@ -18,21 +18,19 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \DobroSite\Specification\Doctrine\Handler\AnyHandler
  */
-class AnyHandlerTest extends TestCase
+final class AnyHandlerTest extends TestCase
 {
     /**
      * Проверяемый обработчик.
-     *
-     * @var AnyHandler
      */
-    private $handler;
+    private AnyHandler $handler;
 
     /**
      * Составитель запросов.
      *
      * @var QueryBuilder&MockObject
      */
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     /**
      * Проверяет создание выражения из спецификации.

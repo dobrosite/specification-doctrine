@@ -47,21 +47,19 @@ class QueryBuilder extends DoctrineQueryBuilder
      *
      * @var string[]
      */
-    private $aliases = [];
+    private array $aliases = [];
 
     /**
      * Реестр обработчиков спецификаций.
-     *
-     * @var HandlerRegistry
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Реестр индексов заполнителей для подстановки параметров.
      *
      * @var int[]
      */
-    private $placeholders = [];
+    private array $placeholders = [];
 
     /**
      * Создаёт составитель запросов.

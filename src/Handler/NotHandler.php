@@ -22,10 +22,8 @@ class NotHandler implements DoctrineHandler
 {
     /**
      * Реестр обработчиков спецификаций.
-     *
-     * @var HandlerRegistry
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Задаёт обработчик спецификаций.
@@ -66,7 +64,7 @@ class NotHandler implements DoctrineHandler
             throw new UnsupportedSpecificationException($nestedSpecification, $handler);
         }
 
-        $nested  = $handler->createCondition($nestedSpecification, $queryBuilder);
+        $nested = $handler->createCondition($nestedSpecification, $queryBuilder);
 
         return $queryBuilder->expr()->not($nested);
     }

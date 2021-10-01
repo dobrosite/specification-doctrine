@@ -17,17 +17,13 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Тесты с использованием реальной БД.
- *
- * @coversNothing
  */
-class QueryTest extends TestCase
+final class QueryTest extends TestCase
 {
     /**
      * Менеджер сущностей.
-     *
-     * @var EntityManagerInterface
      */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     /**
      * TODO Дать краткое описание метода.

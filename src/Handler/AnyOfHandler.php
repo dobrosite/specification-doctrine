@@ -22,10 +22,8 @@ class AnyOfHandler implements DoctrineHandler
 {
     /**
      * Реестр обработчиков спецификаций.
-     *
-     * @var HandlerRegistry
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Задаёт обработчик спецификаций.

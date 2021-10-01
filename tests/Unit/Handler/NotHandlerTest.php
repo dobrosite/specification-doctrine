@@ -20,28 +20,26 @@ use PHPUnit\Framework\TestCase;
  *
  * @covers \DobroSite\Specification\Doctrine\Handler\NotHandler
  */
-class NotHandlerTest extends TestCase
+final class NotHandlerTest extends TestCase
 {
     /**
      * Проверяемый обработчик.
-     *
-     * @var NotHandler
      */
-    private $handler;
+    private NotHandler $handler;
 
     /**
      * Реестр обработчиков спецификаций.
      *
      * @var HandlerRegistry&MockObject
      */
-    private $handlerRegistry;
+    private HandlerRegistry $handlerRegistry;
 
     /**
      * Составитель запросов.
      *
      * @var QueryBuilder&MockObject
      */
-    private $queryBuilder;
+    private QueryBuilder $queryBuilder;
 
     /**
      * Проверяет создание выражения из спецификации.
